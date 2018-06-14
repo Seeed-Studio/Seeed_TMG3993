@@ -1,4 +1,6 @@
-# Grove - Light&Gesture&Color&Proximity Sensor
+# Seeed TMG3993 Library
+
+This is the Arduino library for Seeed's TMG3993 based products. For now, it's Grove - Light&Gesture&Color&Proximity Sensor.
 
 TODO: fix this image when the product is launched.
 
