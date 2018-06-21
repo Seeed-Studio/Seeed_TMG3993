@@ -194,6 +194,7 @@ void TMG3993::setupRecommendedConfigForProximity()
   uint8_t config2 = getCONFIG2();
   //config2 &= (3 << 4);
   config2 |= (3 << 4);  //300% power
+  setCONFIG2(config2);
 
   // this will change the response speed of the detection
   // smaller value will response quickly, but may raise error detection rate
