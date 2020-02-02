@@ -1,39 +1,39 @@
-/*    
- * A library for Grove - Light&Gesture&Color&Proximity Sensor
- *   
- * Copyright (c) 2018 seeed technology co., ltd.  
- * Author      : Jack Shao  
- * Create Time: June 2018
- * Change Log : 
- *
- * The MIT License (MIT)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
+/*
+    A library for Grove - Light&Gesture&Color&Proximity Sensor
+
+    Copyright (c) 2018 seeed technology co., ltd.
+    Author      : Jack Shao
+    Create Time: June 2018
+    Change Log :
+
+    The MIT License (MIT)
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
 
 #ifndef __SEEED_TMG3993_H__
 #define __SEEED_TMG3993_H__
 
 #if (ARDUINO >= 100)
-#include "Arduino.h"
+    #include "Arduino.h"
 #else
-#include "WProgram.h"
+    #include "WProgram.h"
 #endif
 
 #include <Wire.h>
@@ -111,63 +111,62 @@
 
 
 
-class TMG3993
-{
-public:
-  TMG3993(uint8_t i2c_addr = TMG3993_DEFAULT_ADDRESS);
+class TMG3993 {
+  public:
+    TMG3993(uint8_t i2c_addr = TMG3993_DEFAULT_ADDRESS);
 
-  bool initialize(void) ;
-  
-  //common
-  uint8_t getDeviceID(void) ;
-  void enableEngines(uint8_t enable_bits);
-  void setADCIntegrationTime(uint8_t atime);
-  void setWaitTime(uint8_t wtime);
-  void enableWaitTime12xFactor(bool enable);  //CONFIG1 register
-  uint8_t getInterruptPersistenceReg();
-  void setInterruptPersistenceReg(uint8_t pers);
-  uint8_t getControlReg();
-  void setControlReg(uint8_t control);
-  uint8_t getCONFIG2();
-  void setCONFIG2(uint8_t config);
-  uint8_t getCONFIG3();
-  void setCONFIG3(uint8_t config);
-  uint8_t getSTATUS();
-  void clearPatternBurstInterrupts();
-  void forceAssertINTPin();
-  void clearProximityInterrupts();
-  void clearALSInterrupts();
-  void clearAllInterrupts();
+    bool initialize(void) ;
 
-  //proximity
-  void setupRecommendedConfigForProximity();
-  void setProximityInterruptThreshold(uint8_t low, uint8_t high);
-  void setProximityPulseCntLen(uint8_t cnt, uint8_t len);
-  uint8_t getProximityRaw();
-  // if you have glasses on the sensor, then you should adjust the offset
-  // void setProximityOffsetNE(uint8_t offset);
-  // void setProximityOffsetSW(uint8_t offset);
+    //common
+    uint8_t getDeviceID(void) ;
+    void enableEngines(uint8_t enable_bits);
+    void setADCIntegrationTime(uint8_t atime);
+    void setWaitTime(uint8_t wtime);
+    void enableWaitTime12xFactor(bool enable);  //CONFIG1 register
+    uint8_t getInterruptPersistenceReg();
+    void setInterruptPersistenceReg(uint8_t pers);
+    uint8_t getControlReg();
+    void setControlReg(uint8_t control);
+    uint8_t getCONFIG2();
+    void setCONFIG2(uint8_t config);
+    uint8_t getCONFIG3();
+    void setCONFIG3(uint8_t config);
+    uint8_t getSTATUS();
+    void clearPatternBurstInterrupts();
+    void forceAssertINTPin();
+    void clearProximityInterrupts();
+    void clearALSInterrupts();
+    void clearAllInterrupts();
 
-  //Color and ALS (Light)
-  void setALSInterruptThreshold(uint16_t low, uint16_t high);
-  void getRGBCRaw(uint16_t *R, uint16_t *G, uint16_t *B, uint16_t *C);
-  int32_t getLux(uint16_t R, uint16_t G, uint16_t B, uint16_t C);
-  int32_t getLux();
-  //Correlated Color Temperature (CCT)
-  int32_t getCCT(uint16_t R, uint16_t G, uint16_t B, uint16_t C);
-  int32_t getCCT();
+    //proximity
+    void setupRecommendedConfigForProximity();
+    void setProximityInterruptThreshold(uint8_t low, uint8_t high);
+    void setProximityPulseCntLen(uint8_t cnt, uint8_t len);
+    uint8_t getProximityRaw();
+    // if you have glasses on the sensor, then you should adjust the offset
+    // void setProximityOffsetNE(uint8_t offset);
+    // void setProximityOffsetSW(uint8_t offset);
 
-  //Gesture
-  //Gesture needs algorithm, which is pending on AMS's delievery.
-  //Will update this library as soon as we get the alglrithm from AMS.
-  
-  
- 
-private:
-  TwoWire *m_i2c;
-  uint8_t m_addr;
-  int readRegs(int addr, uint8_t *data, int len);
-  int writeRegs(uint8_t *data, int len);
+    //Color and ALS (Light)
+    void setALSInterruptThreshold(uint16_t low, uint16_t high);
+    void getRGBCRaw(uint16_t* R, uint16_t* G, uint16_t* B, uint16_t* C);
+    int32_t getLux(uint16_t R, uint16_t G, uint16_t B, uint16_t C);
+    int32_t getLux();
+    //Correlated Color Temperature (CCT)
+    int32_t getCCT(uint16_t R, uint16_t G, uint16_t B, uint16_t C);
+    int32_t getCCT();
+
+    //Gesture
+    //Gesture needs algorithm, which is pending on AMS's delievery.
+    //Will update this library as soon as we get the alglrithm from AMS.
+
+
+
+  private:
+    TwoWire* m_i2c;
+    uint8_t m_addr;
+    int readRegs(int addr, uint8_t* data, int len);
+    int writeRegs(uint8_t* data, int len);
 };
 
 #endif
