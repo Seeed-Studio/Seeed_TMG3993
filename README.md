@@ -1,4 +1,4 @@
-# Seeed TMG3993 Library
+# Seeed TMG3993 Library  [![Build Status](https://travis-ci.com/Seeed-Studio/Seeed_TMG3993.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Seeed_TMG3993)
 
 This is the Arduino library for Seeed's TMG3993 based products. For now, it's Grove - Light&Gesture&Color&Proximity Sensor.
 
