@@ -295,7 +295,7 @@ int32_t TMG3993::getLux() {
 }
 
 int32_t TMG3993::getCCT(uint16_t R, uint16_t G, uint16_t B, uint16_t C) {
-    int32_t IR, lR, lG, lB, min;
+    int32_t IR, lR, lG, lB, minV;
     IR = R + G + B;
     IR = (IR - C) / 2;
     if (IR < 0) {
@@ -303,9 +303,9 @@ int32_t TMG3993::getCCT(uint16_t R, uint16_t G, uint16_t B, uint16_t C) {
     }
 
     lR = R; lG = G; lB = B;
-    min = min(lR, lB);
-    if (IR < min) {
-        IR = min - 0.1;
+    minV = min(lR, lB);
+    if (IR < minV) {
+        IR = minV - 0.1;
     }
 
     float rate = (float)(lB - IR) / (float)(lR - IR);
